@@ -52,7 +52,7 @@ class Elo:
                         pass
                     else:
                         print(row)
-                        self.playersDict[row[0]] = int(row[1])
+                        self.playersDict[row[0]] = float(row[1])
                     line_count += 1
                 csv_file.close()
 

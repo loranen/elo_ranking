@@ -53,14 +53,25 @@ class EloGui:
         self.add_player_btn.pack()
 
     def add_player(self):
-        self.league.addPlayer(self.player_entry.get())
-        self.newPlayerWindow.destroy()
-        menu = self.dropw["menu"]
-        menu.delete(0, "end")
-        for string in self.league.playersDict:
-            menu.add_command(label=string, 
-                             command=lambda value=string: self.playerw_var.set(value))
+        new_player = self.player_entry.get()
 
+        if new_player in self.league.playersDict:
+            print("Player already exists")
+        else:
+            self.league.addPlayer(new_player)
+            menuw = self.dropw["menu"]
+            menuw.delete(0, "end")
+            for string in self.league.playersDict:
+                menuw.add_command(label=string, 
+                                command=lambda value=string: self.playerw_var.set(value))
+            
+            menul = self.dropl["menu"]
+            menul.delete(0, "end")
+            for string in self.league.playersDict:
+                menul.add_command(label=string, 
+                                command=lambda value=string: self.playerl_var.set(value))
+                                
+        self.newPlayerWindow.destroy()
 
     def submit_game(self):
         print(self.league.playersDict)
