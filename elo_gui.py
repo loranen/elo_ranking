@@ -1,13 +1,13 @@
 from elo import Elo
 from tkinter import *
 from tkinter import Menu
+from tkinter import ttk
 
 class EloGui:
     def __init__(self, master, league):
         self.league = league
         self.master = master
         self.master.geometry("350x200")
-
         self.master.title("Pingis Elo")
 
         self.selectw = Label(self.master, text="Select winner")
@@ -39,6 +39,8 @@ class EloGui:
         self.close_button = Button(self.master, text="Close", command=self.master.quit)
         self.close_button.grid(row = 3, column = 1, sticky = W, pady = 2)
 
+        self.ranking_window()
+
     def new_player_window(self):
         self.newPlayerWindow = Toplevel(self.master)
         self.newPlayerWindow.title("Add New Player")
@@ -51,6 +53,32 @@ class EloGui:
 
         self.player_entry.pack()
         self.add_player_btn.pack()
+
+    def ranking_window(self):
+        self.rankingWindow = Toplevel(self.master)
+        self.rankingWindow.title("Rankings")
+        self.rankingWindow.geometry('400x300')
+        self.rankingWindow['bg']='#fb0'
+
+        tv = ttk.Treeview(self.rankingWindow)
+        tv['columns']=('Rank', 'Name', 'Elo')
+        tv.column('#0', width=0, stretch=NO)
+        tv.column('Rank', anchor=CENTER, width=80)
+        tv.column('Name', anchor=CENTER, width=80)
+        tv.column('Elo', anchor=CENTER, width=80)
+
+        tv.heading('#0', text='', anchor=CENTER)
+        tv.heading('Rank', text='Id', anchor=CENTER)
+        tv.heading('Name', text='rank', anchor=CENTER)
+        tv.heading('Elo', text='Elo', anchor=CENTER)
+
+        sorted_rankings = sorted(self.league.playersDict.items(), key = lambda kv: kv[1], reverse=True)
+        counter = 1
+        for player in sorted_rankings:
+            tv.insert(parent='', index=counter-1, iid=counter-1, text='',\
+                values=(str(counter), player[0], round(player[1])))
+            counter += 1
+        tv.pack()
 
     def add_player(self):
         new_player = self.player_entry.get()
@@ -70,11 +98,14 @@ class EloGui:
             for string in self.league.playersDict:
                 menul.add_command(label=string, 
                                 command=lambda value=string: self.playerl_var.set(value))
-                                
+
         self.newPlayerWindow.destroy()
 
     def submit_game(self):
-        print(self.league.playersDict)
         win = self.playerw_var.get()
         los = self.playerl_var.get()
         self.league.gameOver(winner = win, loser = los)
+        self.rankingWindow.destroy()
+        self.ranking_window()
+        print(self.league.playersDict)
+
