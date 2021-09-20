@@ -10,7 +10,7 @@ class Elo:
 
     def addPlayer(self,name,rating = 1000):
         self.playersDict[name] = rating
-        with open('saved_elos.csv', 'a', newline='') as csv_file:
+        with open('saved_elos.csv', 'a+', newline='') as csv_file:
             writer = csv.writer(csv_file)
             writer.writerow([name, rating])
         csv_file.close()
@@ -33,8 +33,6 @@ class Elo:
             writer.writerow(["player", "elo"])
             for player in self.playersDict:
                 writer.writerow([player, self.playersDict[player]])
-
-
         csv_file.close()
 
     def expectResult(self, p1, p2):

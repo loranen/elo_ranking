@@ -23,6 +23,9 @@ class EloGui:
         #self.menubar.add_command(label='Edit')
         self.menu.add_cascade(label='File', menu=self.menubar)
         self.master.config(menu=self.menu)
+        if not self.league.playersDict:
+            fisrt_player = input("Please enter first player's name:\n")
+            self.league.addPlayer(fisrt_player)
 
         # datatype of menu text
         self.playerw_var = StringVar()
@@ -70,15 +73,15 @@ class EloGui:
         style.configure('Treeview', rowheight=80) # repace 40 with whatever you need
 
         tv = ttk.Treeview(self.rankingWindow)
-        tv['columns']=('Rank', 'Name', 'Elo')
+        tv['columns']=('Pos', 'Name', 'Elo')
         tv.column('#0', width=0, stretch=NO)
-        tv.column('Rank', anchor=CENTER, width=300)
+        tv.column('Pos', anchor=CENTER, width=300)
         tv.column('Name', anchor=CENTER, width=300)
         tv.column('Elo', anchor=CENTER, width=300)
 
         tv.heading('#0', text='', anchor=CENTER)
-        tv.heading('Rank', text='Id', anchor=CENTER)
-        tv.heading('Name', text='rank', anchor=CENTER)
+        tv.heading('Pos', text='Pos.', anchor=CENTER)
+        tv.heading('Name', text='Name', anchor=CENTER)
         tv.heading('Elo', text='Elo', anchor=CENTER)
 
         sorted_rankings = sorted(self.league.playersDict.items(), key = lambda kv: kv[1], reverse=True)
