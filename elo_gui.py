@@ -57,15 +57,24 @@ class EloGui:
     def ranking_window(self):
         self.rankingWindow = Toplevel(self.master)
         self.rankingWindow.title("Rankings")
-        self.rankingWindow.geometry('400x300')
+        self.rankingWindow.geometry('1200x1000')
         self.rankingWindow['bg']='#fb0'
+
+        style = ttk.Style()
+
+        style.configure("Treeview", font=(None, 50))
+        style.configure('Treeview', background="white")
+
+        style.configure("Treeview.Heading", font=(None, 70))
+        style.configure('Treeview.Heading', background="white")
+        style.configure('Treeview', rowheight=80) # repace 40 with whatever you need
 
         tv = ttk.Treeview(self.rankingWindow)
         tv['columns']=('Rank', 'Name', 'Elo')
         tv.column('#0', width=0, stretch=NO)
-        tv.column('Rank', anchor=CENTER, width=80)
-        tv.column('Name', anchor=CENTER, width=80)
-        tv.column('Elo', anchor=CENTER, width=80)
+        tv.column('Rank', anchor=CENTER, width=300)
+        tv.column('Name', anchor=CENTER, width=300)
+        tv.column('Elo', anchor=CENTER, width=300)
 
         tv.heading('#0', text='', anchor=CENTER)
         tv.heading('Rank', text='Id', anchor=CENTER)
