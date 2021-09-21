@@ -4,7 +4,7 @@ Elo ranking system with GUI
 
 ## Description
 
-This project was made for tracing the progress of the players in Ping Pong on our working place. 
+This project was made for tracing the progress of the players in ping pong. However, it can be used on almost any 1vs1 game.
 
 ## Getting Started
 
@@ -45,4 +45,4 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 ## Acknowledgments
 
-The elo class is modified from [here](https://github.com/ddm7018/Elo).
+The elo class is modified from [here](https://github.com/ddm7018/Elo/tree/master/elosports).
