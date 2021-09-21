@@ -9,6 +9,7 @@ class EloGui:
         self.master = master
         self.master.geometry("350x200")
         self.master.title("Pingis Elo")
+        self.master.attributes('-topmost', 1)
 
         self.selectw = Label(self.master, text="Select winner")
         self.selectw.grid(row = 0, column = 0, sticky = W, pady = 10, padx=20)
@@ -60,7 +61,7 @@ class EloGui:
     def ranking_window(self):
         self.rankingWindow = Toplevel(self.master)
         self.rankingWindow.title("Rankings")
-        self.rankingWindow.geometry('1200x1000')
+        self.rankingWindow.geometry("{0}x{1}+0+0".format(self.rankingWindow.winfo_screenwidth(), self.rankingWindow.winfo_screenheight()))
         self.rankingWindow['bg']='#fb0'
 
         style = ttk.Style()

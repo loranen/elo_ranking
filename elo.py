@@ -83,12 +83,3 @@ class Elo:
                 writer.writerow(["time", "winner", "winnerNewElo", "loser", "loserNewElo"])
             csv_file.close()
 
-
-if __name__ == "__main__":
-    test = Elo(k = 20)
-    test.addPlayer("Vesa")
-    test.addPlayer("Leevi")
-
-    print(test.expectResult(test.playersDict['Leevi'],test.playersDict['Vesa']))
-    test.gameOver(winner = "Leevi", loser = "Vesa")
-    print(test.expectResult(test.playersDict['Leevi'],test.playersDict['Vesa']))
