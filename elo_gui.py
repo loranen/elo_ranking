@@ -37,6 +37,9 @@ class EloGui:
         self.dropw.grid(row = 1, column = 0, sticky = W, padx=20)
         self.dropl.grid(row = 1, column = 50, sticky = W, padx=20)
 
+        self.submit_button = Button(self.master, text="Swap", command=self.swap_players)
+        self.submit_button.grid(row = 1, column = 1, sticky = W, pady = 2)
+
         self.submit_button = Button(self.master, text="Submit", command=self.submit_game)
         self.submit_button.grid(row = 2, column = 1, sticky = W, pady = 2)
 
@@ -121,4 +124,12 @@ class EloGui:
         self.rankingWindow.destroy()
         self.ranking_window()
         print(self.league.playersDict)
+
+    def swap_players(self):
+        win = self.playerw_var.get()
+        los = self.playerl_var.get()
+        self.playerw_var.set(los)
+        self.playerl_var.set(win)
+
+
 
