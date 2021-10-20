@@ -11,7 +11,7 @@ This project was made for tracing the progress of the players in ping pong. Howe
 ### Dependencies
 
 * Python 3
-* Install Tkinter: apt-get install python-tk (Linux Command)
+* Install Tkinter: sudo apt-get install python3-tk (Linux Command)
 
 ### Executing program
 
